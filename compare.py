@@ -21,6 +21,7 @@ def print_(
     file2_dict: dict[str, set[str]],
     print_count: bool = False,
     intersection: bool = False,
+    as_sva: bool = False,
 ):
     if intersection:
         f = lambda key: file1_dict[key].intersection(
@@ -35,6 +36,12 @@ def print_(
                 key,
                 len(f(key)),
             )
+    elif as_sva:
+        for key in file1_dict:
+            for rhs in f(key):
+                print(
+                    f"assert property (@(posedge clk_i) disable iff (!rst_ni) {key} |-> ##1 {rhs});"
+                )
     else:
         for key in file1_dict:
             print(key, f(key))
@@ -59,10 +66,14 @@ def main():
     _ = group.add_argument(
         "-i", "--invert", help="Return FILE2 - FILE1", action="store_true"
     )
-    _ = parser.add_argument(
+    group2 = parser.add_mutually_exclusive_group()
+    _ = group2.add_argument(
         "--count",
         help="Print the count instead of elements",
         action="store_true",
+    )
+    _ = group2.add_argument(
+        "--sva", help="Print as SVA instead of elements", action="store_true"
     )
 
     args = parser.parse_args()
@@ -72,6 +83,7 @@ def main():
     common: bool = args.common  # pyright: ignore[reportAny]
     invert: bool = args.invert  # pyright: ignore[reportAny]
     count: bool = args.count  # pyright: ignore[reportAny]
+    as_sva: bool = args.sva  # pyright: ignore[reportAny]
 
     file1_dict: dict[str, set[str]] = {}
     with open(file1_path, "r") as f:
@@ -93,14 +105,22 @@ def main():
                 file2_dict[antecedent] = set()
             file2_dict[antecedent].add(consequent)
 
-        if invert:
-            print_(
-                file2_dict, file1_dict, intersection=common, print_count=count
-            )
-        else:
-            print_(
-                file1_dict, file2_dict, intersection=common, print_count=count
-            )
+    if invert:
+        print_(
+            file2_dict,
+            file1_dict,
+            intersection=common,
+            print_count=count,
+            as_sva=as_sva,
+        )
+    else:
+        print_(
+            file1_dict,
+            file2_dict,
+            intersection=common,
+            print_count=count,
+            as_sva=as_sva,
+        )
     return
 
 
