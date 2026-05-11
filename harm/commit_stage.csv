@@ -1,0 +1,6 @@
+"cex","commit_instr_i[0].ex.valid","commit_instr_i[0].use_imm"
+"cex","commit_instr_i[0].ex.valid","commit_instr_i[1].use_imm"
+"cex","commit_instr_i[1].ex.valid","commit_instr_i[1].use_imm"
+"cex","commit_instr_i[1].use_pc","commit_instr_i[0].use_imm"
+"cex","commit_instr_i[1].use_pc","commit_instr_i[1].use_imm"
+"cex","commit_instr_i[1].valid","commit_instr_i[1].use_imm"
