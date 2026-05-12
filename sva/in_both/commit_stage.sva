@@ -1,0 +1,6 @@
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[0].ex.valid |-> ##1 commit_instr_i[0].use_imm);
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[0].ex.valid |-> ##1 commit_instr_i[1].use_imm);
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[1].ex.valid |-> ##1 commit_instr_i[1].use_imm);
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[1].use_pc |-> ##1 commit_instr_i[0].use_imm);
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[1].use_pc |-> ##1 commit_instr_i[1].use_imm);
+assert property (@(posedge clk_i) disable iff (!rst_ni) commit_instr_i[1].valid |-> ##1 commit_instr_i[1].use_imm);
