@@ -24,7 +24,6 @@ def print_(
     as_sva: bool = False,
     category: bool = False,
     file1_status_dict: dict[tuple[str, str], str] = {},
-    file2_status_dict: dict[tuple[str, str], str] = {},
 ):
     if intersection:
         f = lambda key: file1_dict[key].intersection(
@@ -49,7 +48,10 @@ def print_(
                 )
     else:
         for key in file1_dict:
-            print(key, f(key))
+            for rhs in f(key):
+                if category:
+                    print(f"{file1_status_dict.get((key, rhs), "")}, ", end="")
+                print(f"{key},{rhs}")
     return
 
 
@@ -129,8 +131,7 @@ def main():
             print_count=count,
             as_sva=as_sva,
             category=category,
-            file1_status_dict=file1_status_dict,
-            file2_status_dict=file2_status_dict,
+            file1_status_dict=file2_status_dict,
         )
     else:
         print_(
@@ -141,7 +142,6 @@ def main():
             as_sva=as_sva,
             category=category,
             file1_status_dict=file1_status_dict,
-            file2_status_dict=file2_status_dict,
         )
     return
 
