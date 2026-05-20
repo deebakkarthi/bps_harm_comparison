@@ -1,0 +1,63 @@
+proven:
+
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_i_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  no_st_pending_i |-> ##1 commit_lsu_ready_i);
+
+cex:
+
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_ack_o[0] |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_ack_o[1] |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_ack_o[1] |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_ack_o[1] |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_csr_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].ex.valid |-> ##1 commit_instr_i[0].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].ex.valid |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].ex.valid |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].ex.valid |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].is_compressed |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].is_compressed |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].use_imm |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].use_pc |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].use_pc |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[0].valid |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].ex.valid |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].ex.valid |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].ex.valid |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].is_compressed |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].is_compressed |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].use_imm |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].use_pc |-> ##1 commit_instr_i[0].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].use_pc |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].use_pc |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].use_pc |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].valid |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].valid |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_instr_i[1].valid |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  commit_lsu_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  csr_write_fflags_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  csr_write_fflags_o |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  dirty_fp_state_o |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  dirty_fp_state_o |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  exception_o.valid |-> ##1 commit_instr_i[0].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  exception_o.valid |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  exception_o.valid |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  exception_o.valid |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_i_o |-> ##1 commit_instr_i[0].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_i_o |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_i_o |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_o |-> ##1 commit_instr_i[0].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_o |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  fence_o |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_fpr_o[0] |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_fpr_o[0] |-> ##1 no_st_pending_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_gpr_o[0] |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_gpr_o[1] |-> ##1 commit_instr_i[1].use_imm);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_gpr_o[1] |-> ##1 commit_lsu_ready_i);
+  * assert property (@(posedge clk_i) disable iff (!rst_ni)  we_gpr_o[1] |-> ##1 no_st_pending_i);
+
+undetermined:
+
+  * (none)
+
+
