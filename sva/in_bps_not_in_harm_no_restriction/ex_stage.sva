@@ -1,0 +1,11 @@
+assert property (@(posedge clk_i) disable iff (!rst_ni) debug_mode_i |-> ##1 debug_mode_i);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.i_div.div_res_zero_q |-> ##1 i_mult.i_div.rem_sel_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.i_div.div_res_zero_q |-> ##1 i_mult.i_div.div_res_zero_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.i_div.rem_sel_q |-> ##1 i_mult.i_div.rem_sel_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.i_div.rem_sel_q |-> ##1 i_mult.i_div.div_res_zero_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.word_op_q |-> ##1 i_mult.i_div.rem_sel_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.word_op_q |-> ##1 i_mult.word_op_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) i_mult.word_op_q |-> ##1 i_mult.i_div.div_res_zero_q);
+assert property (@(posedge clk_i) disable iff (!rst_ni) lsu_i.i_store_unit.store_buffer_i.speculative_read_pointer_q[0] |-> ##1 debug_mode_i);
+assert property (@(posedge clk_i) disable iff (!rst_ni) lsu_i.i_store_unit.store_buffer_i.speculative_write_pointer_q[0] |-> ##1 debug_mode_i);
+assert property (@(posedge clk_i) disable iff (!rst_ni) no_st_pending_o |-> ##1 lsu_commit_ready_o);
