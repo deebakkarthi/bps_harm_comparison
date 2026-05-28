@@ -27,5 +27,7 @@ if [[ ! -d $2 ]]; then
 	mkdir -p "$2"
 fi
 
-#find "$1"  -depth -maxdepth 1 -mindepth 1 -type d -exec ./scripts/convert_harm_to_csv.sh {}/assertion_list.log \;
-find "$1"  -depth -maxdepth 1 -mindepth 1 -type d -exec sh -c 'i=$(basename "$1").csv; ./scripts/convert_harm_to_csv.sh $1/assertion_list.log > "$2"/"$i"' shell {} "$2" \;
+find "$1"  -depth -maxdepth 1 -mindepth 1 -type d \
+	-exec sh -c 'i=$(basename "$1").csv;\
+	./scripts/convert_harm_to_csv.sh $1/assertion_list.log > "$2"/"$i"'\
+	shell {} "$2" \;
